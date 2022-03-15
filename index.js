@@ -25,10 +25,9 @@ app.use("/api/auth", require("./routes/auth"));
 // CRUD
 app.use("/api/events", require("./routes/events"));
 
-const port = process.env.PORT;
 // Listener
-app.listen(port, () => {
-  console.log("servidor corriendo en puerto: ", port);
+app.listen(process.env.PORT, () => {
+  console.log("servidor corriendo en puerto: ", process.env.PORT);
 });
 
 console.log("hola mundo!!!");
