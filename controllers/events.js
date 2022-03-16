@@ -7,7 +7,6 @@ const createEvent = async (req, res) => {
     event.user = req.uid;
 
     const eventDB = await event.save();
-
     return res.status(201).json({
       ok: true,
       event: eventDB,
@@ -72,10 +71,13 @@ const editEvent = async (req, res) => {
       }
 
       await Event.findByIdAndUpdate(eventId, newEvent);
+      await event.populate("user", "name");
+
+      newEvent.user = event.user;
       return res.status(200).json({
         ok: true,
         msg: "Evento editado",
-        id: newEvent,
+        newEvent,
       });
     } else {
       return res.status(404).json({
